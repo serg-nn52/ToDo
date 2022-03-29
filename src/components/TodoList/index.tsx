@@ -1,17 +1,17 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import TodoItem from "./TodoItem";
 
-import { visibalTodo } from "../../store/todo/selectors";
+import { visibalTodo } from "../../store/todo/sliceTodo";
+import { useAppSelector } from "../../hooks";
 
 export type todoValueType = {
   title: string;
-  id: number;
+  id: string;
   checked: boolean;
 };
 
 const TodoList: React.FC = () => {
-  const todo: todoValueType[] = useSelector(visibalTodo);
+  const todo: todoValueType[] = useAppSelector(visibalTodo);
 
   return (
     <ul>

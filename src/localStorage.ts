@@ -1,8 +1,10 @@
 import { todoValueType } from "./components/TodoList";
 
-type StateType = {
+export type StateType = {
   todo: todoValueType[];
-  filter: string;
+  filter: {
+    value: string;
+  };
 };
 
 export const loadState = (): StateType | undefined => {

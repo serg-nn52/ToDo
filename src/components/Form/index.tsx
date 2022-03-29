@@ -1,13 +1,13 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { createAddTodoAction } from "../../store/todo/actions";
+import { useAppDispatch } from "../../hooks";
+import { addTodo } from "../../store/todo/sliceTodo";
 
 const Form: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const submitHandler = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (e.target.inputName.value.trim() !== "") {
-      dispatch(createAddTodoAction(e.target.inputName.value));
+      dispatch(addTodo(e.target.inputName.value));
     }
     e.target.inputName.value = [];
   };

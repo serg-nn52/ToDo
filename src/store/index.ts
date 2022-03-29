@@ -1,19 +1,21 @@
-import { applyMiddleware, createStore } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
-
-import rootReducer from "./rootReduser";
+import { configureStore } from "@reduxjs/toolkit";
 import { loadState, saveState } from "../localStorage";
+import filterReduser from "../store/filter/sliceFilter";
+import todoReduser from "../store/todo/sliceTodo";
 
-export const configureStore = () => {
-  const persistedState = loadState();
-  const store = createStore(
-    rootReducer,
-    persistedState,
-    composeWithDevTools(applyMiddleware())
-  );
+const persistedState = loadState();
 
-  store.subscribe(() => {
-    saveState(store.getState());
-  });
-  return store;
-};
+export const store = configureStore({
+  reducer: {
+    todo: todoReduser,
+    filter: filterReduser,
+  },
+  preloadedState: persistedState,
+});
+
+store.subscribe(() => {
+  saveState(store.getState());
+});
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
