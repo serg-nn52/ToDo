@@ -3,14 +3,14 @@ import { loadState, saveState } from "../localStorage";
 import filterReduser from "../store/filter/sliceFilter";
 import todoReduser from "../store/todo/sliceTodo";
 
-const persistedState = loadState();
+const preloadedState = loadState();
 
 export const store = configureStore({
   reducer: {
     todo: todoReduser,
     filter: filterReduser,
   },
-  preloadedState: persistedState,
+  preloadedState,
 });
 
 store.subscribe(() => {
